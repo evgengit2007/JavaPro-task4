@@ -1,0 +1,20 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+[INFO   ] Connecting to the database
+[INFO   ] Database connection: javaPro
+[INFO   ] Start init database
+[INFO   ] insert data for 1 row
+[INFO   ] read all data
+[INFO   ] [Users{id=1, username='Evgen'}, Users{id=2, username='Vasia'}, Users{id=3, username='Sergey'}, Users{id=4, username='Ivan'}, Users{id=5, username='Katya'}]
+[INFO   ] find data by id
+[INFO   ] Users{id=1, username='Evgen'}
+[INFO   ] update data by id
+[INFO   ] Users{id=1, username='EvgenUpdate'}
+[INFO   ] read all data after update row
+[INFO   ] [Users{id=2, username='Vasia'}, Users{id=3, username='Sergey'}, Users{id=4, username='Ivan'}, Users{id=5, username='Katya'}, Users{id=1, username='EvgenUpdate'}]
+[INFO   ] delete data
+[INFO   ] delete row from table users: true
+[INFO   ] read all data after delete row
+[INFO   ] [Users{id=2, username='Vasia'}, Users{id=3, username='Sergey'}, Users{id=4, username='Ivan'}, Users{id=5, username='Katya'}]
+[INFO   ] Database closed

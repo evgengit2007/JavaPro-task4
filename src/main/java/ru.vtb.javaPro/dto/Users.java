@@ -1,14 +1,12 @@
 package ru.vtb.javaPro.dto;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 @EqualsAndHashCode
 @NoArgsConstructor
 @Getter
 @Setter
 
-@Component
 public class Users {
     private Long id;
     private String username;

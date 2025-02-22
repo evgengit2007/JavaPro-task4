@@ -1,19 +1,14 @@
 package ru.vtb.javaPro.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.vtb.javaPro.dto.Users;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class UserDao {
     private final Connection connection;
 
-//    @Autowired
     public UserDao(Connection connection) throws SQLException {
         this.connection = connection;
     }
@@ -46,6 +41,7 @@ public class UserDao {
             Users users = new Users();
             users.setId(resultSet.getLong("id"));
             users.setUsername(resultSet.getString("username"));
+            resultSet.close();
             return users;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -61,6 +57,7 @@ public class UserDao {
             Users users = new Users();
             users.setId(resultSet.getLong("id"));
             users.setUsername(resultSet.getString("username"));
+            resultSet.close();
             return users;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -77,7 +74,6 @@ public class UserDao {
 
             updateStatement.setLong(2, users.getId());
             updateStatement.executeUpdate();
-            readData();
             return users;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -88,20 +84,20 @@ public class UserDao {
         if (users == null) return null;
         try {
             if (users.getId() == null) {
-                PreparedStatement daleteStatement = connection
+                PreparedStatement deleteStatement = connection
                         .prepareStatement("DELETE FROM users WHERE username = ?;");
 
-                daleteStatement.setString(1, users.getUsername());
-                daleteStatement.executeUpdate();
-                readData();
+                deleteStatement.setString(1, users.getUsername());
+                deleteStatement.executeUpdate();
+                deleteStatement.close();
                 if (getUserByUsername(users.getUsername()) != null) return false;
             } else {
-                PreparedStatement daleteStatement = connection
+                PreparedStatement deleteStatement = connection
                         .prepareStatement("DELETE FROM users WHERE id = ?;");
 
-                daleteStatement.setLong(1, users.getId());
-                daleteStatement.executeUpdate();
-                readData();
+                deleteStatement.setLong(1, users.getId());
+                deleteStatement.executeUpdate();
+                deleteStatement.close();
                 if (getUserById(users.getId()) != null) return false;
             }
             return true;

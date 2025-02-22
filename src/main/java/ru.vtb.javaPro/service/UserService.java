@@ -6,14 +6,12 @@ import org.springframework.stereotype.Service;
 import ru.vtb.javaPro.dao.UserDao;
 import ru.vtb.javaPro.dto.Users;
 
-import java.sql.Connection;
 import java.util.List;
 
 @Component
 public class UserService {
-    private final UserDao userDao;
+    private UserDao userDao;
 
-//    @Autowired
     public UserService(UserDao userDao) {
         this.userDao = userDao;
     }

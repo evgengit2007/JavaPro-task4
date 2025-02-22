@@ -1,14 +1,11 @@
 package ru.vtb.javaPro.connect;
 
 import com.zaxxer.hikari.HikariDataSource;
-import lombok.SneakyThrows;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import ru.vtb.javaPro.Main;
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;
-import java.io.FilterInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +13,7 @@ import java.sql.Statement;
 import java.util.Properties;
 import java.util.Scanner;
 
-//@Component
+@Component
 public class DButil {
     private static final String DB_URL = "db.url";
     private static final String DB_USERNAME = "db.username";
