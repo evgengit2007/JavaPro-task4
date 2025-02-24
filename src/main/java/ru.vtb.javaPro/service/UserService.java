@@ -1,14 +1,12 @@
 package ru.vtb.javaPro.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.vtb.javaPro.dao.UserDao;
 import ru.vtb.javaPro.dto.Users;
 
 import java.util.List;
 
-@Component
+@Service
 public class UserService {
     private UserDao userDao;
 

@@ -1,20 +1,26 @@
 package ru.vtb.javaPro;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import ru.vtb.javaPro.config.ApplicationConfig;
 import ru.vtb.javaPro.connect.DButil;
 import ru.vtb.javaPro.dto.Users;
 import ru.vtb.javaPro.service.UserService;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
+@Configuration
+@ComponentScan("ru.vtb.javaPro")
 public class Main {
     public static void main(String[] args) throws SQLException {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
         UserService userService = context.getBean(UserService.class);
-        run(userService);
+        DataSource dataSource = context.getBean(DataSource.class);
+        run(userService, dataSource);
     }
     private static final Logger log;
     static {
@@ -23,9 +29,9 @@ public class Main {
     }
 
 
-    public static void run(UserService userService) throws SQLException {
+    public static void run(UserService userService, DataSource dataSource) throws SQLException {
         log.info("Connecting to the database");
-        Connection connection = DButil.getDataSource().getConnection();
+        Connection connection = dataSource.getConnection();
         log.info("Database connection: " + connection.getCatalog());
         log.info("Start init database");
         DButil.dbMigration(connection);
