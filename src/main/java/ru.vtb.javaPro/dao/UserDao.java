@@ -1,6 +1,6 @@
 package ru.vtb.javaPro.dao;
 
-import ru.vtb.javaPro.connect.DButil;
+import org.springframework.stereotype.Repository;
 import ru.vtb.javaPro.dto.Users;
 
 import javax.sql.DataSource;
@@ -8,15 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UserDao {
-/*
-    private final Connection connection;
-
-    public UserDao(Connection connection) throws SQLException {
-        this.connection = connection;
-    }
-*/
-
     private final Connection connection;
 
     public UserDao(DataSource dataSource) throws SQLException {

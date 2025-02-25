@@ -3,7 +3,6 @@ package ru.vtb.javaPro;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import ru.vtb.javaPro.config.ApplicationConfig;
 import ru.vtb.javaPro.connect.DButil;
 import ru.vtb.javaPro.dto.Users;
 import ru.vtb.javaPro.service.UserService;
