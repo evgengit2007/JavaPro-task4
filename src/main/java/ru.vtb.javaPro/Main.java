@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 @Configuration
-@ComponentScan("ru.vtb.javaPro")
+@ComponentScan
 public class Main {
     public static void main(String[] args) throws SQLException {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
@@ -21,19 +21,16 @@ public class Main {
         DataSource dataSource = context.getBean(DataSource.class);
         run(userService, dataSource);
     }
-    private static final Logger log;
-    static {
-        System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-7s] %5$s %n");
-        log = Logger.getLogger(Main.class.getName());
-    }
-
 
     public static void run(UserService userService, DataSource dataSource) throws SQLException {
+        Logger log;
+        System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-7s] %5$s %n");
+        log = Logger.getLogger(Main.class.getName());
         log.info("Connecting to the database");
         Connection connection = dataSource.getConnection();
         log.info("Database connection: " + connection.getCatalog());
         log.info("Start init database");
-        DButil.dbMigration(connection);
+//        DButil.dbMigration(connection);
         log.info("insert data for 1 row");
         userService.insertRow(new Users("Evgen"));
         userService.insertRow(new Users("Vasia"));

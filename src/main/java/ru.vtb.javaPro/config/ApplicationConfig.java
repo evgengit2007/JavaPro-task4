@@ -2,11 +2,11 @@ package ru.vtb.javaPro.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 import ru.vtb.javaPro.dao.UserDao;
 import ru.vtb.javaPro.service.UserService;
 
@@ -14,7 +14,6 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 @Configuration
-@Component
 @PropertySource("classpath:application.properties")
 public class ApplicationConfig {
     private final String url;
@@ -46,12 +45,12 @@ public class ApplicationConfig {
         return new HikariDataSource(hikariConfig);
     }
 
-    public UserDao userDao(DataSource dataSource) throws SQLException {
-        return new UserDao(dataSource);
+    @Bean
+    public Flyway flyway() {
+        Flyway flyway = Flyway.configure().baselineOnMigrate(true).dataSource(dataSource()).locations("classpath:db/migration").load();
+        System.out.println(flyway.getConfiguration().getDataSource().toString());
+        flyway.repair();
+        flyway.migrate();
+        return flyway;
     }
-
-    public UserService userService(UserDao userDao) {
-        return new UserService(userDao);
-    }
-
 }

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class DButil {
     public static void dbMigration(Connection connection) {
-        Scanner scanner = new Scanner(Main.class.getClassLoader().getResourceAsStream("migration/init.sql"));
+        Scanner scanner = new Scanner(Main.class.getClassLoader().getResourceAsStream("db/migration/V1_init.sql"));
         try {
             Statement statement = connection.createStatement();
             while (scanner.hasNextLine()) {
