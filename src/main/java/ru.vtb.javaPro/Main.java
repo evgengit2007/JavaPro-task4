@@ -3,7 +3,6 @@ package ru.vtb.javaPro;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import ru.vtb.javaPro.connect.DButil;
 import ru.vtb.javaPro.dto.Users;
 import ru.vtb.javaPro.service.UserService;
 
@@ -30,7 +29,6 @@ public class Main {
         Connection connection = dataSource.getConnection();
         log.info("Database connection: " + connection.getCatalog());
         log.info("Start init database");
-//        DButil.dbMigration(connection);
         log.info("insert data for 1 row");
         userService.insertRow(new Users("Evgen"));
         userService.insertRow(new Users("Vasia"));

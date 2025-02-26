@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import ru.vtb.javaPro.dao.UserDao;
-import ru.vtb.javaPro.service.UserService;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -47,8 +44,11 @@ public class ApplicationConfig {
 
     @Bean
     public Flyway flyway() {
-        Flyway flyway = Flyway.configure().baselineOnMigrate(true).dataSource(dataSource()).locations("classpath:db/migration").load();
-        System.out.println(flyway.getConfiguration().getDataSource().toString());
+        Flyway flyway = Flyway.configure()
+                .baselineOnMigrate(true)
+                .dataSource(dataSource())
+                .locations("classpath::db.migration")
+                .load();
         flyway.repair();
         flyway.migrate();
         return flyway;
