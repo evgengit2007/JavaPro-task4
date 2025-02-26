@@ -47,7 +47,7 @@ public class ApplicationConfig {
         Flyway flyway = Flyway.configure()
                 .baselineOnMigrate(true)
                 .dataSource(dataSource())
-                .locations("classpath::db.migration")
+                .locations("classpath:db/migration")
                 .load();
         flyway.repair();
         flyway.migrate();
